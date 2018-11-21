@@ -29,15 +29,15 @@ package com.luispichio.ajmodbus;
  * @author Luis Pichio | luispichio@gmail.com | https://sites.google.com/site/luispichio/ | https://github.com/luispichio
  */
 public class ModbusRequest {
-    int slaveAddress;
-    int function;    
-    int address;
-    int quantity;
-    int[] value;
+    public int slaveAddress;
+    public int function;    
+    public int address;
+    public int quantity;
+    public int[] value;
     
-    int fileNumber;
-    int recordNumber;
-    int recordLength;
+    public int fileNumber;
+    public int recordNumber;
+    public int recordLength;
     
-    int retrys;
+    public int retrys;
 }

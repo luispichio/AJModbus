@@ -29,39 +29,39 @@ package com.luispichio.ajmodbus;
  * @author Luis Pichio | luispichio@gmail.com | https://sites.google.com/site/luispichio/ | https://github.com/luispichio
  */
 public class ModbusUtils {
-    static void putWord(byte[] frame, int word, int offset){
+    public static void putWord(byte[] frame, int word, int offset){
         frame[offset] = (byte) (word >> 8);
         frame[offset + 1] = (byte) (word & 0xff);
     }
     
-    static void putWordFlip(byte[] frame, int word, int offset){
+    public static void putWordFlip(byte[] frame, int word, int offset){
         frame[offset + 1] = (byte) (word >> 8);
         frame[offset] = (byte) (word & 0xff);
     }
     
-    static int getWord(byte[] frame, int offset){
+    public static int getWord(byte[] frame, int offset){
         int result = frame[offset] & 0xff;
         result <<= 8;
         result += frame[offset + 1] & 0xff;
         return result;
     } 
     
-    static int getWordFlip(byte[] frame, int offset){
+    public static int getWordFlip(byte[] frame, int offset){
         int result = frame[offset + 1] & 0xff;
         result <<= 8;
         result += frame[offset] & 0xff;
         return result;
     }    
      
-    static long getUInt(int[] registers, int offset){
+    public static long getUInt(int[] registers, int offset){
         return ((registers[offset + 1] & 0xFFFF) << 16) | (registers[offset] & 0xFFFF);
     }
     
-    static int getInt(int[] registers, int offset){
+    public static int getInt(int[] registers, int offset){
         return ((registers[offset + 1] & 0xFFFF) << 16) | (registers[offset] & 0xFFFF);
     }
 
-    static float getFloat(int[] registers, int offset){
+    public static float getFloat(int[] registers, int offset){
         return Float.intBitsToFloat(((registers[offset + 1] & 0xFFFF) << 16) | (registers[offset] & 0xFFFF));
     }
     
@@ -125,7 +125,7 @@ public class ModbusUtils {
         0x43, 0x83, 0x41, 0x81, 0x80, 0x40
     };
   
-    static int crc16(int crc, byte[] frame, int size){
+    public static int crc16(int crc, byte[] frame, int size){
         int index;
         int crcLo = crc & 0xff;
         int crcHi = (crc >> 8) & 0xff;
@@ -137,14 +137,14 @@ public class ModbusUtils {
         return crcHi << 8 | crcLo;
     }
 
-    static boolean[] int2boolean(int[] value) {
+    public static boolean[] int2boolean(int[] value) {
         boolean[] result = new boolean[value.length];
         for (int i = 0 ; i < value.length ; i++)
             result[i] = value[i] != 0;
         return result;
     }
 
-    static int[] boolean2int(boolean[] value) {
+    public static int[] boolean2int(boolean[] value) {
         int[] result = new int[value.length];
         for (int i = 0 ; i < value.length ; i++)
             result[i] = value[i] ? 0xFF00: 0x0000;
